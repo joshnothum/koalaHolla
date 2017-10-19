@@ -96,13 +96,7 @@ function appendKoalas(koalas) {
     $tr.append('<td>' + koala.readyForTransfer + '</td>');
     $tr.append('<td>' + koala.notes + '</td>');
     $tr.append('<td><button class="deleteButton" data-id="' + koala.id + '">Delete</button></td>');
-<<<<<<< HEAD
     
-=======
-    if (transfer = 'N' || 'n') {
-    $tr.append('<td><button class="transferButton" data-id="' + koala.id + '">Transer</button></td>');
-    }
->>>>>>> cb12e01d4e36ad7547b95c1f153286f752a8ea62
     $('#viewKoalas').append($tr);
   }
 }
