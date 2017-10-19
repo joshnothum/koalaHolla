@@ -1,27 +1,45 @@
 console.log( 'js' );
 
-$( document ).ready( function(){
-  console.log( 'JQ' );
+$( document ).ready(readyNow);
+
+function readyNow() {
+  $('#addButton').on('click', appendKoalas);
+  console.log('JQ');
   // load existing koalas on page load
   getKoalas();
+}
+  
+
 
   // add koala button click
-  $( '#addButton' ).on( 'click', function(){
-    console.log( 'in addButton on click' );
+  function addKoala() {
+    console.log('in addButton on click');
     // get user input and put in an object
     // NOT WORKING YET :(
     // using a test object
+    var koalaName = $('#nameIn').val();
+    var koalaAge = $('#ageIn').val();
+    var koalaGender = $('#genderIn').val();
+    var koalaReady = $('#readyForTransferIn').val();
+    var koalaNotes = $('#notesIn').val();
+    console.log('koala name', koalaName);
     var objectToSend = {
-      name: 'testName',
-      age: 'testName',
-      gender: 'testName',
-      readyForTransfer: 'testName',
-      notes: 'testName',
-    };
+      name: koalaName,
+      age: koalaAge,
+      gender: koalaGender,
+      readyForTransfer: koalaReady,
+      notes: koalaNotes
+  }
+    console.log(objectToSend);
+    $('#addKoala').val('');
     // call saveKoala with the new obejct
-    saveKoala( objectToSend );
-  }); //end addButton on click
-}); // end doc ready
+    saveKoala(objectToSend);
+
+}; //end addButton on click 
+    
+  
+    
+   
 
 function getKoalas(){
   console.log( 'in getKoalas' );
@@ -31,6 +49,7 @@ function getKoalas(){
     type: 'GET',
     success: function( data ){
       console.log( 'got some koalas: ', data );
+      
     } // end success
   }); //end ajax
   // display on DOM with buttons that allow edit of each
@@ -47,4 +66,21 @@ function saveKoala( newKoala ){
       console.log( 'got some koalas: ', data );
     } // end success
   }); //end ajax
+}
+
+function appendKoalas(koalas) {
+  $('#addKoala').empty();
+  for (var i = 0; i < koalas.length; i += 1);
+  var koala = koalas[i];
+  var $tr = $('<tr></tr>');
+  $tr.data('koala', koala);
+  $tr.append('<td>' + koala.name + '</td>');
+  $tr.append('<td>' + koala.age + '</td>');
+  $tr.append('<td>' + koala.gender + '</td>');
+  $tr.append('<td>' + koala.transfer + '</td>');
+  $tr.append('<td>' + koala.notes + '</td>');
+  $tr.append('<td>button class="deleteButton" data-id="' + koala.id + '">Delete</button></td>');
+  $tr.append('<td>button class="transferButton" data-id="' + koala.id + '">Transer</button></td>');
+  $('#viewKoalas').append($tr);
+
 }
