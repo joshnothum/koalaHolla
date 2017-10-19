@@ -11,10 +11,11 @@
     <link rel="stylesheet" href="styles/style.css">
   </head>
   <body>
+    <div class="jumbotron">
     <img src="images/icon.png" id="koalaLogo"/>
-    <h1>Koala Holla</h1>
-    <h2>1976 Llama Comma Drive</h2>
-    <h2>Walla Walla, WA</h2>
+    <h1 id="title">Koala Holla</h1>
+    <h2 id="address">1976 Llama Comma Drive, Walla Walla, WA</h2>
+    </div>
     <div class="container" id="addKoala">
       <h2>Add Koala</h2>
       <input type="text" id="nameIn" value="" placeholder="Name">
@@ -26,7 +27,7 @@
     </div>
     <div>
       <h2>All Koalas</h2>
-      <table>
+      <table class="table-bordered">
         <thead>
           <tr>
             <th>Name</th>

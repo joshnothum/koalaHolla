@@ -1,4 +1,17 @@
 #koalaLogo {
-    height: 100px;
+    height: 175px;
     width: auto;
+}
+
+ .jumbotron {
+    background-color: teal;
+ }
+
+ img {
+    float: left;
+    margin: 25px 10px 0 0;
+}
+
+#title, #address {
+    float: center;
 }
