@@ -62,4 +62,30 @@ router.get('/', function(req, res){
   
   }); //END POST ROUTE
 
+
+  router.delete('/:id', function(req, res){
+    var koalaAdded = req.body;
+    var koalaID = req.params.id;
+
+    pool.connect(function(errorConnectingToDb, db, done) {
+    
+      if(errorConnectingToDb) {
+        console.log('Error connecting', errorConnectingToDb);
+        res.send(500);
+      } else {
+        var queryText = 'DELETE FROM "koalas" WHERE "id" = $1;';
+        db.query(queryText, function(errorMakingQuery, result){
+          done();
+          if(errorMakingQuery) {
+            console.log('Error making query', errorMakingQuery)
+            res.send(500);
+          } else {
+            res.sendStatus(201);
+          }
+        }) //END QUERY
+      }
+    }); //END POOL
+  
+  }); //END delete ROUTE
+
 module.exports = router;
