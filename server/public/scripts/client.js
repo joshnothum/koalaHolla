@@ -1,14 +1,19 @@
 console.log( 'js' );
 
-$( document ).ready( function(){
-  console.log( 'JQ' );
+$( document ).ready(readyNow);
+
+function readyNow() {
+  $('#addButton').on('click', appendKoalas);
+  console.log('JQ');
   // load existing koalas on page load
   getKoalas();
+}
   
 
+
   // add koala button click
-  $( '#addButton' ).on( 'click', appendKoalas(){
-    console.log( 'in addButton on click' );
+  function addKoala() {
+    console.log('in addButton on click');
     // get user input and put in an object
     // NOT WORKING YET :(
     // using a test object
@@ -23,16 +28,18 @@ $( document ).ready( function(){
       age: koalaAge,
       gender: koalaGender,
       readyForTransfer: koalaReady,
-      notes: koalaNotes,
-    };
-    
+      notes: koalaNotes
+  }
     console.log(objectToSend);
     $('#addKoala').val('');
     // call saveKoala with the new obejct
-    saveKoala( objectToSend );
+    saveKoala(objectToSend);
+
+}; //end addButton on click 
     
-  }); //end addButton on click
-}); // end doc ready
+  
+    
+   
 
 function getKoalas(){
   console.log( 'in getKoalas' );
