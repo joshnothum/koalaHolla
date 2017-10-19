@@ -11,6 +11,8 @@ var config = {
     idleTimeoutMillis: 30000
 };
 
+var pool = new pg.Pool(config);
+
 router.get('/', function(req, res){
     
     pool.connect(function(errorConnectingToDb, db, done) {
@@ -46,7 +48,7 @@ router.get('/', function(req, res){
         res.send(500);
       } else {
         var queryText = 'INSERT INTO "koalas" ("name", "gender", "age", "ready_for_transfer", "notes") VALUES ($1, $2, $3, $4, $5);'
-        db.query(queryText, [koalaAdded.name, koalaAdded.gender, koalaAdded.age, koalaAdded.ready_for_transfer, koalaAdded.notes], function(errorMakingQuery, result){
+        db.query(queryText, [koalaAdded.name, koalaAdded.gender, koalaAdded.age, koalaAdded.readyForTransfer, koalaAdded.notes], function(errorMakingQuery, result){
           done();
           if(errorMakingQuery) {
             console.log('Error making query', errorMakingQuery)
