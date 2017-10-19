@@ -37,11 +37,7 @@ router.get('/', function(req, res){
   }); //END GET ROUTE
 
   router.post('/', function(req, res){
-    var koalaName = req.body.name;
-    var koalaGender = req.body.gender;
-    var koalaAge = req.body.age;
-    var koalaTransfer = req.body.readyForTransfer;
-    var koalaNotes = req.body.notes;
+    var koalaAdded = req.body;
 
     pool.connect(function(errorConnectingToDb, db, done) {
     
@@ -49,16 +45,14 @@ router.get('/', function(req, res){
         console.log('Error connecting', errorConnectingToDb);
         res.send(500);
       } else {
-        
-        var queryText = 'INSERT INTO "koalas";'; //
-        db.query(queryText, function(errorMakingQuery, result){
-        
+        var queryText = 'INSERT INTO "koalas" ("name", "gender", "age", "ready_for_transfer", "notes") VALUES ($1, $2, $3, $4, $5);'
+        db.query(queryText, [koalaAdded.name, koalaAdded.gender, koalaAdded.age, koalaAdded.ready_for_transfer, koalaAdded.notes], function(errorMakingQuery, result){
           done();
           if(errorMakingQuery) {
             console.log('Error making query', errorMakingQuery)
             res.send(500);
           } else {
-            res.send(result.rows);
+            res.sendStatus(201);
           }
         }) //END QUERY
       }
