@@ -95,8 +95,13 @@ function appendKoalas(koalas) {
     $tr.append('<td>' + koala.gender + '</td>');
     $tr.append('<td>' + koala.readyForTransfer + '</td>');
     $tr.append('<td>' + koala.notes + '</td>');
-    $tr.append('<td><button class="deleteButton" data-id="' + koala.id + '">Delete</button></td>');
-    
+    $tr.append('<td><button class="deleteButton" class="btn btn-danger" data-id="' + koala.id + '">Delete</button></td>');
+    if (koala.readyForTransfer === 'N' || koala.readyForTransfer === 'n') {
+      console.log(koala.readyForTransfer);
+      $tr.append('<td><button class="transferButton" data-id="' + koala.id + '">Transfer</button></td>');
+      } else {
+      console.log('nope');
+    }
     $('#viewKoalas').append($tr);
   }
 }
@@ -115,12 +120,12 @@ function deleteClicked() {
   })
 }
 
-function transferClicked(updatedTransfer) {
+function transferClicked() {
   var koalaId = $(this).data('id');
   $.ajax({
     method: 'PUT', 
     url: '/koalas/' + koalaId,
-    data: updatedTransfer
+    
   }).done(function(response){
     console.log(response);
     refreshKoalas();
