@@ -10,8 +10,15 @@
   "author": "@devjana",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "pg": "^7.3.0"
+=======
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "pg": "^7.3.0",
+    "postgresql": "0.0.1"
+>>>>>>> 3717383136029adb424e7e6882f26cdbdb3e2c57
   }
 }
