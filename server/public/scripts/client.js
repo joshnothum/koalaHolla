@@ -70,6 +70,20 @@ function saveKoala( newKoala ){
   }); //end ajax
 }
 
+function refreshKoalas() {
+  $.ajax({
+    type: 'GET',
+    url: '/koalas'
+  }).done(function (response) {
+    var koalaList = response;
+    appendKoalas(koalaList);
+  }).fail(function (error) {
+    alert('Koalas went bad');
+  });
+}
+
+
+
 function appendKoalas(koalas) {
   $('#viewKoalas').empty();
   for (var i = 0; i < koalas.length; i += 1) {
@@ -79,7 +93,7 @@ function appendKoalas(koalas) {
     $tr.append('<td>' + koala.name + '</td>');
     $tr.append('<td>' + koala.age + '</td>');
     $tr.append('<td>' + koala.gender + '</td>');
-    $tr.append('<td>' + koala.transfer + '</td>');
+    $tr.append('<td>' + koala.readyForTransfer + '</td>');
     $tr.append('<td>' + koala.notes + '</td>');
     $tr.append('<td>button class="deleteButton" data-id="' + koala.id + '">Delete</button></td>');
     $tr.append('<td>button class="transferButton" data-id="' + koala.id + '">Transer</button></td>');
