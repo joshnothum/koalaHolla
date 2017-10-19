@@ -47,11 +47,12 @@ function getKoalas(){
   $.ajax({
     url: '/koalas',
     type: 'GET',
-    success: function( data ){
+  }).done(function( data ){
       console.log( 'got some koalas: ', data );
-      
-    } // end success
-  }); //end ajax
+    }) // end success
+    .fail(function(error){
+      console.log('not working', error);
+    }); //end ajax
   // display on DOM with buttons that allow edit of each
 } // end getKoalas
 
