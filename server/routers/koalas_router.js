@@ -62,7 +62,6 @@ router.get('/', function(req, res){
   
   }); //END POST ROUTE
 
-
   router.delete('/:id', function(req, res){
     var koalaAdded = req.body;
     var koalaID = req.params.id;
