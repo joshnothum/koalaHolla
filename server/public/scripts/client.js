@@ -3,10 +3,10 @@ console.log( 'js' );
 $( document ).ready(readyNow);
 
 function readyNow() {
-  $('#addButton').on('click', appendKoalas);
+  $('#addButton').on('click', addKoala);
   console.log('JQ');
   // load existing koalas on page load
-  getKoalas();
+  refreshKoalas();
 }
   
 
@@ -36,26 +36,23 @@ function readyNow() {
     saveKoala(objectToSend);
 
 }; //end addButton on click 
-    
   
-    
-   
 
-function getKoalas(){
-  console.log( 'in getKoalas' );
-  // ajax call to server to get koalas
-  $.ajax({
-    url: '/koalas',
-    type: 'GET',
-  }).done(function( data ){
-      console.log( 'got some koalas: ', data );
-      appendKoalas(data);
-    }) // end success
-    .fail(function(error){
-      console.log('not working', error);
-    }); //end ajax
-  // display on DOM with buttons that allow edit of each
-} // end getKoalas
+// function getKoalas(){
+//   console.log( 'in getKoalas' );
+//   // ajax call to server to get koalas
+//   $.ajax({
+//     url: '/koalas',
+//     type: 'GET',
+//   }).done(function( data ){
+//       console.log( 'got some koalas: ', data );
+//       appendKoalas(data);
+//     }) // end success
+//     .fail(function(error){
+//       console.log('not working', error);
+//     }); //end ajax
+//   // display on DOM with buttons that allow edit of each
+// } // end getKoalas
 
 function saveKoala( newKoala ){
   console.log( 'in saveKoala', newKoala );
@@ -66,6 +63,7 @@ function saveKoala( newKoala ){
     data: newKoala,
     success: function( data ){
       console.log( 'got some koalas: ', data );
+      refreshKoalas();
     } // end success
   }); //end ajax
 }
@@ -78,7 +76,7 @@ function refreshKoalas() {
     var koalaList = response;
     appendKoalas(koalaList);
   }).fail(function (error) {
-    alert('Koalas went bad');
+    alert('Koalas went bad', error);
   });
 }
 
@@ -99,7 +97,6 @@ function appendKoalas(koalas) {
     $tr.append('<td>button class="transferButton" data-id="' + koala.id + '">Transer</button></td>');
     $('#viewKoalas').append($tr);
   }
-
 }
 
 function deleteClicked() {
