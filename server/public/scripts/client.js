@@ -87,3 +87,17 @@ function appendKoalas(koalas) {
   }
 
 }
+
+function deleteClicked() {
+  var koalaId = $(this).data('id');
+  console.log('Delete koala with id', koalaId);
+  $.ajax({
+    method: 'DELETE',
+    url: '/koalas' + koalaId,
+  }).done (function (response){
+    console.log(response);
+    refreshKoalas();
+  }).fail(function(error){
+    console.log('something is wrong with the koalas', error);
+  })
+}
