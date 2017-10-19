@@ -36,5 +36,34 @@ router.get('/', function(req, res){
   
   }); //END GET ROUTE
 
+  router.post('/', function(req, res){
+    var koalaName = req.body.name;
+    var koalaGender = req.body.gender;
+    var koalaAge = req.body.age;
+    var koalaTransfer = req.body.readyForTransfer;
+    var koalaNotes = req.body.notes;
+
+    pool.connect(function(errorConnectingToDb, db, done) {
+    
+      if(errorConnectingToDb) {
+        console.log('Error connecting', errorConnectingToDb);
+        res.send(500);
+      } else {
+        
+        var queryText = 'INSERT INTO "koalas";'; //
+        db.query(queryText, function(errorMakingQuery, result){
+        
+          done();
+          if(errorMakingQuery) {
+            console.log('Error making query', errorMakingQuery)
+            res.send(500);
+          } else {
+            res.send(result.rows);
+          }
+        }) //END QUERY
+      }
+    }); //END POOL
+  
+  }); //END POST ROUTE
 
 module.exports = router;
