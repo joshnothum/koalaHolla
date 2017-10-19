@@ -63,9 +63,8 @@ router.get('/', function(req, res){
   }); //END POST ROUTE
 
   router.delete('/:id', function(req, res){
-    var koalaAdded = req.body;
     var koalaID = req.params.id;
-
+    console.log(koalaID);
     pool.connect(function(errorConnectingToDb, db, done) {
     
       if(errorConnectingToDb) {
@@ -73,7 +72,31 @@ router.get('/', function(req, res){
         res.send(500);
       } else {
         var queryText = 'DELETE FROM "koalas" WHERE "id" = $1;';
-        db.query(queryText, function(errorMakingQuery, result){
+        db.query(queryText, [koalaID], function(errorMakingQuery, result){
+          done();
+          if(errorMakingQuery) {
+            console.log('Error making query', errorMakingQuery)
+            res.send(500);
+          } else {
+            res.sendStatus(201);
+          }
+        }) //END QUERY
+      }
+    }); //END POOL
+  
+  }); //END delete ROUTE
+
+  router.put('/:id', function(req, res){
+    var koalaID = req.params.id;
+    console.log(koalaID);
+    pool.connect(function(errorConnectingToDb, db, done) {
+    
+      if(errorConnectingToDb) {
+        console.log('Error connecting', errorConnectingToDb);
+        res.send(500);
+      } else {
+        var queryText = 'UPDATE "koalas" SET "readyForTransfer" = $1 WHERE "id" = $2;';
+        db.query(queryText, ['Y', koalaID], function(errorMakingQuery, result){
           done();
           if(errorMakingQuery) {
             console.log('Error making query', errorMakingQuery)
