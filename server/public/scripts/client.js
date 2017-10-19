@@ -95,8 +95,8 @@ function appendKoalas(koalas) {
     $tr.append('<td>' + koala.gender + '</td>');
     $tr.append('<td>' + koala.readyForTransfer + '</td>');
     $tr.append('<td>' + koala.notes + '</td>');
-    $tr.append('<td>button class="deleteButton" data-id="' + koala.id + '">Delete</button></td>');
-    $tr.append('<td>button class="transferButton" data-id="' + koala.id + '">Transer</button></td>');
+    $tr.append('<td><button class="deleteButton" data-id="' + koala.id + '">Delete</button></td>');
+    $tr.append('<td><button class="transferButton" data-id="' + koala.id + '">Transer</button></td>');
     $('#viewKoalas').append($tr);
   }
 
