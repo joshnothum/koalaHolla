@@ -47,7 +47,7 @@ router.get('/', function(req, res){
         console.log('Error connecting', errorConnectingToDb);
         res.send(500);
       } else {
-        var queryText = 'INSERT INTO "koalas" ("name", "gender", "age", "ready_for_transfer", "notes") VALUES ($1, $2, $3, $4, $5);'
+        var queryText = 'INSERT INTO "koalas" ("name", "gender", "age", "readyForTransfer", "notes") VALUES ($1, $2, $3, $4, $5);'
         db.query(queryText, [koalaAdded.name, koalaAdded.gender, koalaAdded.age, koalaAdded.readyForTransfer, koalaAdded.notes], function(errorMakingQuery, result){
           done();
           if(errorMakingQuery) {
