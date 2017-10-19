@@ -6,7 +6,7 @@ var pg = require('pg');
 var config = {
     database: 'deneb',
     host: 'localhost',
-    port: 5000,
+    port: 5432,
     max: 10,
     idleTimeoutMillis: 30000
 };

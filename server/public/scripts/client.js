@@ -49,6 +49,7 @@ function getKoalas(){
     type: 'GET',
   }).done(function( data ){
       console.log( 'got some koalas: ', data );
+      appendKoalas(data);
     }) // end success
     .fail(function(error){
       console.log('not working', error);
@@ -70,18 +71,19 @@ function saveKoala( newKoala ){
 }
 
 function appendKoalas(koalas) {
-  $('#addKoala').empty();
-  for (var i = 0; i < koalas.length; i += 1);
-  var koala = koalas[i];
-  var $tr = $('<tr></tr>');
-  $tr.data('koala', koala);
-  $tr.append('<td>' + koala.name + '</td>');
-  $tr.append('<td>' + koala.age + '</td>');
-  $tr.append('<td>' + koala.gender + '</td>');
-  $tr.append('<td>' + koala.transfer + '</td>');
-  $tr.append('<td>' + koala.notes + '</td>');
-  $tr.append('<td>button class="deleteButton" data-id="' + koala.id + '">Delete</button></td>');
-  $tr.append('<td>button class="transferButton" data-id="' + koala.id + '">Transer</button></td>');
-  $('#viewKoalas').append($tr);
+  $('#viewKoalas').empty();
+  for (var i = 0; i < koalas.length; i += 1) {
+    var koala = koalas[i];
+    var $tr = $('<tr></tr>');
+    $tr.data('koala', koala);
+    $tr.append('<td>' + koala.name + '</td>');
+    $tr.append('<td>' + koala.age + '</td>');
+    $tr.append('<td>' + koala.gender + '</td>');
+    $tr.append('<td>' + koala.transfer + '</td>');
+    $tr.append('<td>' + koala.notes + '</td>');
+    $tr.append('<td>button class="deleteButton" data-id="' + koala.id + '">Delete</button></td>');
+    $tr.append('<td>button class="transferButton" data-id="' + koala.id + '">Transer</button></td>');
+    $('#viewKoalas').append($tr);
+  }
 
 }
