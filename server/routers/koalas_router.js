@@ -87,16 +87,21 @@ router.get('/', function(req, res){
   }); //END delete ROUTE
 
   router.put('/:id', function(req, res){
+    var readyForTransfer = req.body.readyForTransfer;
+    if (readyForTransfer === 'Y' || readyForTransfer === 'y'){
+      readyForTransfer === 'N';
+    } else if (readyForTransfer === 'N' || readyForTransfer === 'n') {
+      readyForTransfer === 'Y';
+    }
     var koalaID = req.params.id;
     console.log(koalaID);
     pool.connect(function(errorConnectingToDb, db, done) {
-    
       if(errorConnectingToDb) {
         console.log('Error connecting', errorConnectingToDb);
         res.send(500);
       } else {
         var queryText = 'UPDATE "koalas" SET "readyForTransfer" = $1 WHERE "id" = $2;';
-        db.query(queryText, ['Y', koalaID], function(errorMakingQuery, result){
+        db.query(queryText, [readyForTransfer, koalaID], function(errorMakingQuery, result){
           done();
           if(errorMakingQuery) {
             console.log('Error making query', errorMakingQuery)

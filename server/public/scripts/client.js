@@ -120,12 +120,12 @@ function deleteClicked() {
   })
 }
 
-function transferClicked() {
+function transferClicked(updatedTransfer) {
   var koalaId = $(this).data('id');
   $.ajax({
     method: 'PUT', 
     url: '/koalas/' + koalaId,
-    
+    data: updatedTransfer
   }).done(function(response){
     console.log(response);
     refreshKoalas();
