@@ -1,6 +1,8 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var poolModule = require('./modules/pool.js');
+var pool = poolModule;
 var port = process.env.PORT || 5000;
 
 var koalaRouter = require('./routers/koalas_router.js')
